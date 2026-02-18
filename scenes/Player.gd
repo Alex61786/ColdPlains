@@ -17,6 +17,20 @@ const LOOK_SPEED = 5 # Adjust as needed for controller comfort
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
 
+var crouch_height = 0.5
+var stand_height = 2.0
+var crouching = false
+
+func crouch():
+	if Input.is_action_just_pressed("crouch"):
+		crouching = !crouching
+		if crouching:
+			$CollisionShape3D.shape.height = crouch_height
+		else:
+			$CollisionShape3D.shape.height = stand_height
+
+
+
 func _enter_tree():
 	print(name)
 	set_multiplayer_authority(str(name).to_int())
@@ -49,6 +63,8 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	
+	
 	
 	# Add the gravity.
 	if not is_on_floor():
