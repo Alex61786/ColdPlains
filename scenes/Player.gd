@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 signal health_changed(health_value)
 
+@onready var collision_shape = $CollisionShape3D
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
@@ -22,14 +23,9 @@ var gravity = 20.0
 var crouch_height = 0.5
 var stand_height = 2.0
 var crouching = false
+var crouch_speed = 2
 
-func crouch():
-	if Input.is_action_just_pressed("crouch"):
-		crouching = !crouching
-		if crouching:
-			$CollisionShape3D.shape.height = crouch_height
-		else:
-			$CollisionShape3D.shape.height = stand_height
+
 
 
 
@@ -72,6 +68,14 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+	if Input.is_action_just_pressed("crouch"):
+		velocity.x = velocity.x * crouch_speed
+		velocity.z = velocity.z * crouch_speed
+		if crouching:
+			$CollisionShape3D.shape.height = crouch_height
+		else:
+			$CollisionShape3D.shape.height = stand_height
+		move_and_slide()
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
