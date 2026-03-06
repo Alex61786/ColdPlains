@@ -129,3 +129,12 @@ func play_shoot_effects():
 	anim_player.play("shoot")
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
+
+@rpc("any_peer")
+func receive_damage():
+	health -= damage
+	health_changed.emit(health)
+	if health <= 0:
+		get_tree().change_scene_to_file("res://scenes/lose.tscn")
+		#health = 3
+		#position = Vector3.ZERO
