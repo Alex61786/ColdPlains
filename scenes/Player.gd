@@ -79,8 +79,10 @@ func _physics_process(delta):
 		velocity.x = velocity.x * crouch_speed
 		velocity.z = velocity.z * crouch_speed
 		if crouching:
+			camera.position.y = lerp(camera.position.y, 0.4, 0.1)
 			$CollisionShape3D.shape.height = crouch_height
 		else:
+			camera.position.y = lerp(camera.position.y, stand_height, 0.1)
 			$CollisionShape3D.shape.height = stand_height
 		move_and_slide()
 	# Handle Jump.
