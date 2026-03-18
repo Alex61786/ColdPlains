@@ -13,7 +13,6 @@ signal health_changed(health_value)
 @export var slide_speed: float = 20.0
 @export var slide_duration: float = 0.5
 @export var slide_friction: float = 0.95
-
 var is_sliding: bool = false
 var slide_timer: float = 0.0
 
@@ -29,9 +28,10 @@ var gravity = 20.0
 
 var crouch_height = 0.5
 var stand_height = 2.0
-var crouching = false
+var is_crouched = false
 var crouch_speed = 2
-
+const CROUCH_TRANSLATE = 0.7
+const CROUCH_JUMP_ADD = CROUCH_TRANSLATE * 0.9
 
 
 
@@ -69,22 +69,13 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	
-	
+	_handle_crouch(delta)
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed("crouch"):
-		velocity.x = velocity.x * crouch_speed
-		velocity.z = velocity.z * crouch_speed
-		if crouching:
-			camera.position.y = lerp(camera.position.y, 0.4, 0.1)
-			$CollisionShape3D.shape.height = crouch_height
-		else:
-			camera.position.y = lerp(camera.position.y, stand_height, 0.1)
-			$CollisionShape3D.shape.height = stand_height
-		move_and_slide()
+	
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -160,3 +151,15 @@ func receive_damage():
 		get_tree().change_scene_to_file("res://scenes/lose.tscn")
 		#health = 3
 		#position = Vector3.ZERO
+
+		
+
+func _handle_crouch(delta) -> void:
+	velocity.x = velocity.x * crouch_speed
+	velocity.z = velocity.z * crouch_speed
+	
+	is_crouched = Input.is_action_pressed("crouch")
+	%head.position = Vector3(0,(-CROUCH_TRANSLATE if is_crouched else 0),0)
+	$CollisionShape3D.shape.height = stand_height - CROUCH_TRANSLATE if is_crouched else stand_height
+	$CollisionShape3D.position.y = $CollisionShape3D.shape.height / 2
+	
