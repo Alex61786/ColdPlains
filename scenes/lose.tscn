@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo48iw6x2at6s" path="res://Scripts/lose.gd" id="1_vjdtf"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=513223950]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=513223950 groups=["ui"]]
 visible = false
 script = ExtResource("1_vjdtf")
 
