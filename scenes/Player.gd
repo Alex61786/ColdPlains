@@ -7,6 +7,7 @@ signal health_changed(health_value)
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
 @onready var flashlight = $Camera3D/Hand/SpotLight3D
+@onready var health_bar = $CanvasLayer/HUD/HealthBar
 @export var enemy_raycast : RayCast3D
 @export var particle_raycast : RayCast3D
 @export var walk_speed: float = 5.0
@@ -32,6 +33,9 @@ var gravity = 20.0
 func _enter_tree():
 	print(name)
 	set_multiplayer_authority(str(name).to_int())
+
+func _on_health_changed(health_value):\
+	health_bar.value = health_value 
 
 func _ready():
 	if not is_multiplayer_authority(): return
@@ -143,6 +147,9 @@ func play_shoot_effects():
 @rpc("any_peer")
 func receive_damage():
 	health -= damage
+	if is_multiplayer_authority():
+		if health_bar:
+			health_bar.value = health
 	health_changed.emit(health)
 	if health <= 0:
 		get_tree().change_scene_to_file("res://scenes/lose.tscn")
