@@ -18,7 +18,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("headOriginalPostion/head/Camera3D/Pistol:position")
+tracks/0/path = NodePath("Camera3D/Pistol:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,13 +30,17 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("headOriginalPostion/head/Camera3D/Pistol:rotation")
+tracks/1/path = NodePath("Camera3D/Pistol:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(-2, -2),
-"update": 0,
+"update": 0,{
++"deadzone": 0.2,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"location":0,"echo":false,"script":null)
++]
++}
 "values": [Vector3(0, 0, 0), Vector3(-0.122103, 0, 0)]
 }
 
@@ -47,7 +51,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("headOriginalPostion/head/Camera3D/Pistol:position")
+tracks/0/path = NodePath("Camera3D/Pistol:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +67,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("headOriginalPostion/head/Camera3D/Pistol:position")
+tracks/0/path = NodePath("Camera3D/Pistol:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +79,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("headOriginalPostion/head/Camera3D/Pistol:rotation")
+tracks/1/path = NodePath("Camera3D/Pistol:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -134,10 +138,11 @@ size = Vector2(0.5, 0.5)
 orientation = 2
 
 [node name="Player" type="CharacterBody3D" unique_id=820130408 node_paths=PackedStringArray("enemy_raycast")]
+
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_2v3wm")
-enemy_raycast = NodePath("headOriginalPostion/head/Camera3D/EnemyRayCast3D")
+enemy_raycast = NodePath("Camera3D/EnemyRayCast3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1832600017]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -155,20 +160,13 @@ playback_default_blend_time = 0.05
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=374552710]
 replication_config = SubResource("SceneReplicationConfig_hn37q")
 
-[node name="headOriginalPostion" type="Node3D" parent="." unique_id=536519610]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79, 0)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1853814499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51306, 0)
 
-[node name="head" type="Node3D" parent="headOriginalPostion" unique_id=1293026381]
-unique_name_in_owner = true
-
-[node name="CameraSmooth" type="Node3D" parent="headOriginalPostion/head" unique_id=530747185]
-
-[node name="Camera3D" type="Camera3D" parent="headOriginalPostion/head" unique_id=1853814499]
-
-[node name="Pistol" parent="headOriginalPostion/head/Camera3D" unique_id=945160158 instance=ExtResource("2_4esil")]
+[node name="Pistol" parent="Camera3D" unique_id=945160158 instance=ExtResource("2_4esil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.25, -0.5)
 
-[node name="MuzzleFlash" type="GPUParticles3D" parent="headOriginalPostion/head/Camera3D/Pistol" unique_id=215553547]
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/Pistol" unique_id=215553547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0588368, -0.313209)
 emitting = false
 amount = 1
@@ -178,21 +176,24 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_uu53b")
 draw_pass_1 = SubResource("PlaneMesh_b2g4i")
 
-[node name="Hand" type="Node3D" parent="headOriginalPostion/head/Camera3D" unique_id=1826501949]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.51306, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="headOriginalPostion/head/Camera3D/Hand" unique_id=2029540740]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1907651, 0)
-shadow_enabled = true
-spot_range = 9.259
-spot_angle = 16.67
-
-[node name="RayCast3D" type="RayCast3D" parent="headOriginalPostion/head/Camera3D" unique_id=1804038237]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1804038237]
 target_position = Vector3(0, 0, -50)
 collision_mask = 2
 
-[node name="EnemyRayCast3D" type="RayCast3D" parent="headOriginalPostion/head/Camera3D" unique_id=890706288]
+[node name="Hand" type="Node3D" parent="Camera3D" unique_id=1826501949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.51306, 0)
+
+[node name="EnemyRayCast3D" type="RayCast3D" parent="Camera3D" unique_id=890706288]
 target_position = Vector3(0, 0, -50)
 collision_mask = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1889766177]
+libraries/ = SubResource("AnimationLibrary_p6wdk")
+autoplay = &"idle"
+playback_default_blend_time = 0.05
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Hand" unique_id=2029540740]
+spot_range = 9.259
+spot_angle = 16.67
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
