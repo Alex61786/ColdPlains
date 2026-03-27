@@ -196,11 +196,12 @@ func _handle_crouch(delta) -> void:
 func die():
 	if is_dead:
 		return
-	is_dead = true
 	velocity = Vector3.ZERO
 	set_process(false)
 	set_physics_process(false)
-	visible = false
+	hide()
+	$MeshInstance3D.hide()
+	print("hide")
 	$CollisionShape3D.disabled = true
 	if is_multiplayer_authority():
 		get_tree().call_group("ui","show_lose_screen")
