@@ -27,8 +27,8 @@ var is_dead: bool = false
 var health = 100
 var damage = 10
 
-const SPEED = 10.0
-const JUMP_VELOCITY = 10.0
+var SPEED = 10.0
+var JUMP_VELOCITY = 10.0
 const LOOK_SPEED = 5 # Adjust as needed for controller comfort
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -37,12 +37,9 @@ var gravity = 20.0
 var crouch_height = 0.5
 var stand_height = 2.0
 var is_crouched = false
-var crouch_speed = 2
+var crouch_speed = 3
+var crouch_jump_velocity = 3
 const CROUCH_TRANSLATE = 0.7
-const CROUCH_JUMP_ADD = CROUCH_TRANSLATE * 0.9
-
-
-
 
 func _enter_tree():
 	print(name)
@@ -184,11 +181,15 @@ func receive_damage():
 		
 
 func _handle_crouch(delta) -> void:
-	velocity.x = velocity.x * crouch_speed
-	velocity.z = velocity.z * crouch_speed
+	if is_crouched: 
+		SPEED = crouch_speed 
+		JUMP_VELOCITY = crouch_jump_velocity
+	else: 
+		SPEED = 10
+		JUMP_VELOCITY = 10
 	
 	is_crouched = Input.is_action_pressed("crouch")
-	%head.position = Vector3(0,(-CROUCH_TRANSLATE if is_crouched else 0),0)
+	camera.position = Vector3(0,(CROUCH_TRANSLATE if is_crouched else 1.513),0)
 	$CollisionShape3D.shape.height = stand_height - CROUCH_TRANSLATE if is_crouched else stand_height
 	$CollisionShape3D.position.y = $CollisionShape3D.shape.height / 2
 	
