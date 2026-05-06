@@ -16,7 +16,10 @@ signal health_changed(health_value)
 @export var slide_duration: float = 0.5
 @export var slide_friction: float = 0.95
 @export var no_cooldown = false
-
+@export var _magazines: int = 10
+@export var _magazine_capacity: int = 20
+var _current_magazine: int = 0
+var _have_ammo: bool = false
 var hit_explosion_scene = preload("res://Shaders/hit_explosion.tscn")
 
 var is_sliding: bool = false
