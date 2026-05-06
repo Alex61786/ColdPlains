@@ -53,9 +53,14 @@ func _on_health_changed(health_value):\
 
 func _ready():
 	if not is_multiplayer_authority(): return
-	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
+	
+	_reload()
+	
+	
+	
+	
 	
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -210,3 +215,20 @@ func die():
 	$CollisionShape3D.disabled = true
 	if is_multiplayer_authority():
 		get_tree().call_group("ui","show_lose_screen")
+
+
+func _shoot():
+	if _have_ammo:
+		_current_magazine -= 1
+		print("Bang! Ammo left: ", _current_magazine)
+		if _current_magazine < 1:
+			_reload()
+		else:
+			print("out of ammo")
+
+func _reload():
+	pass
+	
+	Input.is_action_just_pressed("reloading")
+	_current_magazine = _magazine_capacity
+	print("reload")
