@@ -1,29 +1,76 @@
 [gd_scene format=3 uid="uid://cvnpwobudpc3m"]
 
-[ext_resource type="Texture2D" uid="uid://baj5iftkvq0o4" path="res://assets/images/groundGFloor.png" id="1_xoo1l"]
+[ext_resource type="Texture2D" uid="uid://dn22jysuvbbdf" path="res://assets/images/istockphoto-1390352280-612x612.jpg" id="1_xoo1l"]
+[ext_resource type="Texture2D" uid="uid://oh5anap6dnot" path="res://assets/images/istockphoto-1390352280-612x612_specular(1).png" id="2_8t0ot"]
+[ext_resource type="PackedScene" path="res://scenes/Walls.tscn" id="3_whntf"]
+[ext_resource type="PackedScene" uid="uid://qv7ayncd6sh2" path="res://Models/Decrations/rocks_tall.tscn" id="4_w881m"]
+[ext_resource type="PackedScene" uid="uid://dbhnhwkj771dv" path="res://Models/Decrations/rocks.tscn" id="5_w6vqs"]
+[ext_resource type="MeshLibrary" uid="uid://d3pwu585ltda6" path="res://libary.tres" id="6_w6vqs"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1nidv"]
-size = Vector2(110, 110)
+size = Vector2(140, 140)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t0ot"]
 albedo_texture = ExtResource("1_xoo1l")
+normal_enabled = true
+normal_scale = 0.64
+normal_texture = ExtResource("2_8t0ot")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xoo1l"]
-data = PackedVector3Array(55, 0, 55, -55, 0, 55, 55, 0, -55, -55, 0, 55, -55, 0, -55, 55, 0, -55)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_whntf"]
+data = PackedVector3Array(70, 0, 70, -70, 0, 70, 70, 0, -70, -70, 0, 70, -70, 0, -70, 70, 0, -70)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqv5w"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
-albedo_color = Color(0.56078434, 0.7921569, 1, 0.18039216)
+albedo_color = Color(0.56078434, 0.7921569, 1, 0.1764706)
+proximity_fade_distance = 4096.0
+distance_fade_mode = 2
+distance_fade_min_distance = 2.0
+distance_fade_max_distance = 7.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_xoo1l"]
 material = SubResource("StandardMaterial3D_xqv5w")
 flip_faces = true
 radius = 50.0
-height = 42.0
+height = 52.5
+radial_segments = 128
+rings = 64
 is_hemisphere = true
+
+[sub_resource type="Curve" id="Curve_xoo1l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13375796, 0.84269667), 0.0, 0.0, 0, 0, Vector2(0.3312102, 0.15730345), 0.0, 0.0, 0, 0, Vector2(0.522293, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.7133758, 0.011235952), 0.0, 0.0, 0, 0, Vector2(0.84076434, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4cci"]
+curve = SubResource("Curve_xoo1l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t0ot"]
+emission_shape_offset = Vector3(0, 1.02, 0)
+emission_shape = 3
+emission_box_extents = Vector3(10.16, 1.06, 9.255)
+direction = Vector3(0, -1, 0)
+spread = 62.697
+initial_velocity_min = 0.08
+initial_velocity_max = 0.19999999
+gravity = Vector3(0, -0.052, 0)
+scale_curve = SubResource("CurveTexture_t4cci")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1pw4t"]
+blend_mode = 1
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0, 0.20154393, 0.212695, 1)
+refraction_scale = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_whntf"]
+material = SubResource("StandardMaterial3D_1pw4t")
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 1
 
 [node name="Node3D" type="Node3D" unique_id=471553504]
 
@@ -31,16 +78,53 @@ is_hemisphere = true
 mesh = SubResource("PlaneMesh_1nidv")
 surface_material_override/0 = SubResource("StandardMaterial3D_8t0ot")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1044907544]
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1692667652]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1984787160]
-shape = SubResource("ConcavePolygonShape3D_xoo1l")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1786877825]
+shape = SubResource("ConcavePolygonShape3D_whntf")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=248993006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.037406206, 0)
 mesh = SubResource("SphereMesh_xoo1l")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=188042677]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.716339, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0154743, 0)
+light_color = Color(0.7294118, 0.68235296, 1, 1)
+light_energy = 1.5
+shadow_enabled = true
 omni_range = 55.0
-omni_attenuation = -0.6
+omni_attenuation = 0.0
+
+[node name="Ice" type="GPUParticles3D" parent="." unique_id=180626323]
+transform = Transform3D(4.64, 0, 0, 0, 4.64, 0, 0, 0, 4.64, 0, 0, 0)
+amount = 1000
+lifetime = 5.0
+fixed_fps = 20
+process_material = SubResource("ParticleProcessMaterial_8t0ot")
+draw_pass_1 = SubResource("SphereMesh_whntf")
+
+[node name="Wall" parent="." unique_id=1786420037 instance=ExtResource("3_whntf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 1.8321915, 0.013955414, 0.20969868)
+
+[node name="Environment" type="Node3D" parent="." unique_id=1315492286]
+
+[node name="Rocks2" parent="Environment" unique_id=471023016 instance=ExtResource("4_w881m")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -23.869059, -9.536743e-07, 33.352676)
+
+[node name="Rocks3" parent="Environment" unique_id=750338050 instance=ExtResource("4_w881m")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -37.969673, -9.536743e-07, 7.2539806)
+
+[node name="Rocks" parent="Environment" unique_id=1905639283 instance=ExtResource("5_w6vqs")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 2.7438216, 0, 32.65251)
+
+[node name="Building" type="Node3D" parent="." unique_id=1763372394]
+
+[node name="Floor" type="Node3D" parent="Building" unique_id=279974964]
+
+[node name="GridMap" type="GridMap" parent="Building/Floor" unique_id=1838285905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh_library = ExtResource("6_w6vqs")
+cell_scale = 4.0
+data = {
+"cells": PackedInt32Array(0, 1, 655361, 2, 1, 655361, 65534, 1, 655361, 65532, 1, 655361, 65530, 1, 2, 6, 1, 1441794, 65530, 3, 1441793, 65530, 5, 1441793, 6, 3, 1441793, 6, 5, 1441793, 4, 1, 655361, 6, 7, 655362, 65530, 7, 1048578, 65532, 7, 655361, 65534, 7, 655361, 0, 7, 655361, 2, 7, 655361, 4, 7, 655361, 65535, 9, 5, 1, 9, 1048581, 65532, 5, 655361, 65534, 5, 655361, 0, 5, 655361, -2555904, 65526, 655361, -1638400, 65529, 655361, 0, 3, 655361, -1376256, 65529, 655361, -2031616, 65528, 655361, -11796480, 65461, 655361)
+}

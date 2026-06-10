@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ckf3250w8jpro"
-path="res://.godot/imported/Environment.glb-8e7d6fb98c52ec29ad01d3fe74a3c16f.scn"
+uid="uid://u0cu8ac1y6pw"
+path="res://.godot/imported/wall-door-wide.glb-7351566359803f2933e999c686eaed14.scn"
 
 [deps]
 
-source_file="res://models/Environment.glb"
-dest_files=["res://.godot/imported/Environment.glb-8e7d6fb98c52ec29ad01d3fe74a3c16f.scn"]
+source_file="res://Models/kenney_space-station-kit/Models/GLB format/wall-door-wide.glb"
+dest_files=["res://.godot/imported/wall-door-wide.glb-7351566359803f2933e999c686eaed14.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
-nodes/root_name="Scene Root"
+nodes/root_type=""
+nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -38,5 +38,5 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-gltf/naming_version=0
+gltf/naming_version=2
 gltf/embedded_image_handling=1
