@@ -51,15 +51,19 @@ func attempt_pickup() -> void:
 			print("Picked up: ", closest_item.item_name)
 
 func _on_area_entered(area: Area3D) -> void:
-	if area is Item:
-		if area not in nearby_items:
-			nearby_items.append(area)
-			print("Item nearby: ", area.item_name)
+	# Check if the area belongs to an Item node
+	var item = area.get_parent()
+	if item is Item:
+		if item not in nearby_items:
+			nearby_items.append(item)
+			print("Item nearby: ", item.item_name)
 
 func _on_area_exited(area: Area3D) -> void:
-	if area is Item:
-		nearby_items.erase(area)
-		print("Item out of range: ", area.item_name)
+	# Check if the area belongs to an Item node
+	var item = area.get_parent()
+	if item is Item:
+		nearby_items.erase(item)
+		print("Item out of range: ", item.item_name)
 
 func get_nearby_items() -> Array[Item]:
 	return nearby_items
