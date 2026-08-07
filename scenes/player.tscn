@@ -690,6 +690,8 @@ theme_override_font_sizes/font_size = 15
 value = 100.0
 
 [node name="InterationZone" type="Area3D" parent="." unique_id=609540560]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("8_ur7pv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InterationZone" unique_id=1430255517]

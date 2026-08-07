@@ -5,7 +5,7 @@ class_name ItemSpawner
 @export var spawn_points: Array[Vector3] = []
 @export var num_items_to_spawn: int = 5
 @export var random_offset: float = 1.0
-
+ 
 var spawned_items: Array[Item] = []
 
 func _ready() -> void:
