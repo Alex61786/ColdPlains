@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://3tk255sadi0p" path="res://Models/low-poly_akm.glb" id="6_fjrip"]
 [ext_resource type="Script" uid="uid://do0wykf7eoeeh" path="res://scripts/PlayerInteraction.gd" id="8_ur7pv"]
 [ext_resource type="Script" uid="uid://dkiqddx1hgc2j" path="res://scripts/PlayerInventory.gd" id="9_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://cxrrme7deun3q" path="res://scenes/InventoryUI.tscn" id="10_y4r1p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xk8km"]
 
@@ -699,5 +700,7 @@ shape = SubResource("CapsuleShape3D_bekj2")
 
 [node name="PlayerInventory" type="Node3D" parent="." unique_id=1841873247]
 script = ExtResource("9_y4r1p")
+
+[node name="ItemUI" parent="." unique_id=395193283 instance=ExtResource("10_y4r1p")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

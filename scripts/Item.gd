@@ -14,18 +14,17 @@ var original_position: Vector3
 
 func _ready() -> void:
 	original_position = global_position
-	
-	# Only the authority (server) handles item logic
-	if not is_multiplayer_authority():
-		return
 
 func pick_up(player_id: int) -> bool:
 	if is_picked_up:
+		print("[Item] Already picked up, rejecting pickup")
 		return false
 	
 	is_picked_up = true
+	print("[Item] Picked up by player: ", player_id)
 	
-	# Sync pickup across network
+	# Sync pickup across network to ALL clients
+	# Use rpc() with "call_local" to execute on everyone immediately
 	rpc("_on_item_picked_up", player_id)
 	return true
 
@@ -36,6 +35,7 @@ func _on_item_picked_up(player_id: int) -> void:
 	area_3d.monitoring = false
 	# Keep the item in the scene but invisible and non-interactable
 	# This way it stays synced across the network
+	print("[Item] Pickup synced - item hidden for all clients")
 
 func reset() -> void:
 	if is_multiplayer_authority():
