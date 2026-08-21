@@ -257,6 +257,14 @@ button_group = SubResource("ButtonGroup_dgfsc")
 text = "Player 4
 "
 
+[node name="Label" type="Label" parent="CanvasLayer/LobbyMenu/PanelContainer/MarginContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=179786872]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+text = "Please note: The player list is not yet functional
+The start game button should only be pressed by the host
+Joining an already started game is not supported"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LobbyMenu/PanelContainer/MarginContainer/HBoxContainer" unique_id=2083283603]
 layout_mode = 2
 size_flags_horizontal = 8
