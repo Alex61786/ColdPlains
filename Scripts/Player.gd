@@ -48,11 +48,15 @@ var crouch_speed = 3
 var crouch_jump_velocity = 3
 const CROUCH_TRANSLATE = 0.7
 
+
 func _enter_tree():
 	print(name)
 	set_multiplayer_authority(str(name).to_int())
 
+
 func _ready():
+	#rpc("flashLight_toggle")
+
 	if not is_multiplayer_authority(): 
 		return
 	
@@ -60,9 +64,13 @@ func _ready():
 	camera.current = true
 	
 	$CanvasLayer.visible = true
+	
+	Lobby.player_loaded.rpc_id(1)
+
 
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority() or is_dead:
@@ -106,20 +114,19 @@ func _unhandled_input(event):
 		is_shooting = false
 
 
-	
 func _physics_process(delta):
 	if not is_multiplayer_authority() or is_dead: 
 		return
-	
-	_handle_crouch(delta)
-	
+
+	handle_crouch(delta)
+
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	if Input.is_action_pressed("ui_accept") and is_on_floor():
 		velocity += JUMP_VELOCITY * get_floor_normal()
-		
+
 	if Input.is_action_just_pressed("toggle_flashlight"):
-		flashlight.visible = not flashlight.visible
+		rpc("flashLight_toggle")
 
 	if Input.is_action_just_pressed("slide") and is_on_floor():
 		var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -172,16 +179,18 @@ func _physics_process(delta):
 		
 	if is_shooting and current_weapon == rifle:
 		perform_shooting_logic()
-
-
+		
 	move_and_slide()
+
 
 func perform_shooting_logic():
 	if raycast.is_colliding():
 		var hit_player = raycast.get_collider()
 		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+	
 	if enemy_raycast.is_colliding():
 		enemy_raycast.get_collider().damage_taken += damage
+	
 	if particle_raycast.is_colliding():
 		var hit_explosion = hit_explosion_scene.instantiate()
 		var pos = particle_raycast.get_collision_point()
@@ -189,6 +198,7 @@ func perform_shooting_logic():
 		hit_explosion.look_at_from_position(pos, norm + pos)
 		hit_explosion.setup_particles(damage) #damage for this function should be replaced with damage from the current weapon
 		get_parent().add_child(hit_explosion)
+
 
 func switch_weapons(selected_weapon):
 	#Hide all weapons
@@ -200,18 +210,21 @@ func switch_weapons(selected_weapon):
 	current_weapon = selected_weapon
 	if current_weapon:
 		current_weapon.show()
-		
+
+
 func _on_animation_player_animation_finished(anim_name):
 	print("Animation finished: ", anim_name)  # Check this is called for the "shoot" animation
 	if anim_name == "shoot":
 		can_shoot = true  # Allow shooting again only when shoot animation finishes
 		anim_player.play("idle")  # Transition to idle after shooting
 
+
 func start_slide(direction: Vector3) -> void:
 	is_sliding = true
 	slide_timer = 0.0
 	velocity.x = direction.x * slide_speed
 	velocity.z = direction.z * slide_speed
+
 
 @rpc("call_local")
 func play_shoot_effects():
@@ -235,7 +248,6 @@ func play_shoot_effects():
 			print("Uzi muzzle flash is null")
 
 
-
 @rpc("any_peer", "call_local")
 func receive_damage():
 	print("receive_damage() called on player:", name)
@@ -251,7 +263,8 @@ func receive_damage():
 		is_dead = true
 		rpc("die")
 
-func _handle_crouch(delta) -> void:
+
+func handle_crouch(delta) -> void:
 	if is_crouched: 
 		SPEED = crouch_speed 
 		JUMP_VELOCITY = crouch_jump_velocity
@@ -263,6 +276,7 @@ func _handle_crouch(delta) -> void:
 	camera.position = Vector3(0,(CROUCH_TRANSLATE if is_crouched else 1.513),0)
 	$CollisionShape3D.shape.height = stand_height - CROUCH_TRANSLATE if is_crouched else stand_height
 	$CollisionShape3D.position.y = $CollisionShape3D.shape.height / 2
+
 
 @rpc("authority", "call_local")
 func die():
@@ -276,18 +290,6 @@ func die():
 		get_tree().call_group("ui","show_lose_screen")
 
 
-func _shoot():
-	if _have_ammo:
-		_current_magazine -= 1
-		print("Bang! Ammo left: ", _current_magazine)
-		if _current_magazine < 1:
-			_reload()
-		else:
-			print("out of ammo")
-
-func _reload():
-	pass
-	
-	Input.is_action_just_pressed("reloading")
-	_current_magazine = _magazine_capacity
-	print("reload")
+@rpc("call_local", "reliable", "any_peer")
+func flashLight_toggle():
+	flashlight.visible = not flashlight.visible
