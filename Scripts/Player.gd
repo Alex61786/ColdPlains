@@ -60,6 +60,8 @@ func _ready():
 	camera.current = true
 	
 	$CanvasLayer.visible = true
+	
+	Lobby.player_loaded.rpc_id(1)
 
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -180,8 +182,10 @@ func perform_shooting_logic():
 	if raycast.is_colliding():
 		var hit_player = raycast.get_collider()
 		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+	
 	if enemy_raycast.is_colliding():
 		enemy_raycast.get_collider().damage_taken += damage
+	
 	if particle_raycast.is_colliding():
 		var hit_explosion = hit_explosion_scene.instantiate()
 		var pos = particle_raycast.get_collision_point()
