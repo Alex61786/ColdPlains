@@ -60,6 +60,7 @@ func start_game():
 	# add game starting logic
 
 
+
 @rpc("authority", "call_local", "reliable")
 func steup_hud():
 	hud.show()
