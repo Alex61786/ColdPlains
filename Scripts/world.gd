@@ -11,6 +11,7 @@ extends Node
 @export var name_entry : LineEdit
 @export var lobby_menu : MarginContainer
 @export var start_game_button : Button
+@export var player_button_container : VBoxContainer
 #@onready var Player = $Player
 var tracked = false
 var player
@@ -24,6 +25,7 @@ var isHosting
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Lobby.player_connected.connect(_on_player_connected)
 
 
 func _on_join_button_pressed():
@@ -36,6 +38,7 @@ func _on_join_button_pressed():
 
 
 func _on_host_button_pressed():
+	
 	isHosting = true
 	main_menu.hide()
 	lobby_menu.show()
@@ -85,6 +88,17 @@ func steup_hud():
 func _physics_process(delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
+	if Lobby.players:
+		var ids = Lobby.players.keys()
+		ids.sort()
+		for i in ids.size():
+			var id = ids[i]
+			var button = player_button_container.get_child(i)
+			var player_name = Lobby.players[id]["name"]
+			#print(button)
+			if button:
+				button.visible = true
+				button.text = player_name
 
 
 func _unhandled_input(event):
@@ -132,4 +146,8 @@ func _on_test_level_button_pressed() -> void:
 
 
 func _on_name_entry_text_submitted(new_text: String) -> void:
-	Lobby.player_info["name"] = name_entry.text
+	Lobby.change_name(name_entry.text)
+
+
+func _on_player_connected():
+	pass
