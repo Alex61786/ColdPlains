@@ -29,6 +29,8 @@ func _ready() -> void:
 
 
 func _on_join_button_pressed():
+	Lobby.change_name(name_entry.text)
+	
 	isHosting = false
 	main_menu.hide()
 	lobby_menu.show()
@@ -38,6 +40,7 @@ func _on_join_button_pressed():
 
 
 func _on_host_button_pressed():
+	Lobby.change_name(name_entry.text)
 	
 	isHosting = true
 	main_menu.hide()
@@ -95,7 +98,7 @@ func _physics_process(delta):
 			var id = ids[i]
 			var button = player_button_container.get_child(i)
 			var player_name = Lobby.players[id]["name"]
-			#print(button)
+
 			if button:
 				button.visible = true
 				button.text = player_name
