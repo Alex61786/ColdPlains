@@ -10,6 +10,8 @@ extends Node
 @export var main_level : NavigationRegion3D
 @export var name_entry : LineEdit
 @export var lobby_menu : MarginContainer
+@export var start_game_button : Button
+@export var player_button_container : VBoxContainer
 #@onready var Player = $Player
 var tracked = false
 var player
@@ -23,20 +25,27 @@ var isHosting
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Lobby.player_connected.connect(_on_player_connected)
 
 
 func _on_join_button_pressed():
+	Lobby.change_name(name_entry.text)
+	
 	isHosting = false
 	main_menu.hide()
 	lobby_menu.show()
+	start_game_button.disabled = not isHosting
 	
 	Lobby.join_game(address_entry.text)
 
 
 func _on_host_button_pressed():
+	Lobby.change_name(name_entry.text)
+	
 	isHosting = true
 	main_menu.hide()
 	lobby_menu.show()
+	start_game_button.disabled = not isHosting
 	
 	Lobby.create_game()
 	
@@ -55,6 +64,7 @@ func _on_multiplayer_spawner_spawned(node):
 func start_game():
 	steup_hud.rpc()
 	# add game starting logic
+
 
 
 @rpc("authority", "call_local", "reliable")
@@ -81,6 +91,17 @@ func steup_hud():
 func _physics_process(delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
+	if Lobby.players:
+		var ids = Lobby.players.keys()
+		ids.sort()
+		for i in ids.size():
+			var id = ids[i]
+			var button = player_button_container.get_child(i)
+			var player_name = Lobby.players[id]["name"]
+
+			if button:
+				button.visible = true
+				button.text = player_name
 
 
 func _unhandled_input(event):
@@ -115,6 +136,7 @@ func update_health_bar(health_value):
 	#health_bar.value = health_value
 	var i=0
 
+
 func _on_test_level_button_pressed() -> void:
 	main_level.queue_free()
 	var level = test_level_scene.instantiate()
@@ -127,4 +149,8 @@ func _on_test_level_button_pressed() -> void:
 
 
 func _on_name_entry_text_submitted(new_text: String) -> void:
-	Lobby.player_info["name"] = name_entry.text
+	Lobby.change_name(name_entry.text)
+
+
+func _on_player_connected():
+	pass
