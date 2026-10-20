@@ -294,3 +294,4 @@ func die():
 @rpc("call_local", "reliable", "any_peer")
 func flashLight_toggle():
 	flashlight.visible = not flashlight.visible
+	
