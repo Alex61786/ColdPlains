@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dn22jysuvbbdf" path="res://assets/images/istockphoto-1390352280-612x612.jpg" id="1_xoo1l"]
 [ext_resource type="Texture2D" uid="uid://oh5anap6dnot" path="res://assets/images/istockphoto-1390352280-612x612_specular(1).png" id="2_8t0ot"]
-[ext_resource type="PackedScene" path="res://scenes/Walls.tscn" id="3_whntf"]
+[ext_resource type="PackedScene" uid="uid://dxb7bg1p06wa8" path="res://scenes/Walls.tscn" id="3_whntf"]
 [ext_resource type="PackedScene" uid="uid://qv7ayncd6sh2" path="res://Models/Decrations/rocks_tall.tscn" id="4_w881m"]
 [ext_resource type="PackedScene" uid="uid://dbhnhwkj771dv" path="res://Models/Decrations/rocks.tscn" id="5_w6vqs"]
 [ext_resource type="MeshLibrary" uid="uid://d2i3kxa7cwa27" path="res://librarySource.tres" id="6_kb5rq"]
@@ -55,6 +55,12 @@ is_hemisphere = true
 [sub_resource type="Curve" id="Curve_xoo1l"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13375796, 0.84269667), 0.0, 0.0, 0, 0, Vector2(0.3312102, 0.15730345), 0.0, 0.0, 0, 0, Vector2(0.522293, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.7133758, 0.011235952), 0.0, 0.0, 0, 0, Vector2(0.84076434, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 7
+point_1/position = Vector2(0.13375796, 0.84269667)
+point_2/position = Vector2(0.3312102, 0.15730345)
+point_3/position = Vector2(0.522293, 0.46067423)
+point_4/position = Vector2(0.7133758, 0.011235952)
+point_5/position = Vector2(0.84076434, 1)
+point_6/position = Vector2(1, 0)
 
 [sub_resource type="CurveTexture" id="CurveTexture_t4cci"]
 curve = SubResource("Curve_xoo1l")
@@ -430,13 +436,47 @@ transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.
 
 [node name="stairRamp4" parent="Building 2" unique_id=201166459 instance=ExtResource("18_1pmuy")]
 transform = Transform3D(-3, 2.0057455e-06, -2.8645016e-07, 0, 32.766075, 2.2943056, 2.6226832e-07, 22.943054, -3.276608, -16.415, 0.8324131, 8.022188)
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Building 2" unique_id=1718012697]
 transform = Transform3D(-1.7903136e-07, 2.5071824e-07, -4, 2.8678823, 8.191521, 0, 4.0957603, -5.7357645, -1.7484555e-07, -16.735714, 4.705387, 9.0756035)
-visible = false
 mesh = SubResource("PlaneMesh_7y88a")
 skeleton = NodePath("../stairRamp4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Building 2" unique_id=746935297]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.425331, 7.4288874, 14.34147)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Building 2" unique_id=2033927214]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 7.2881966, 7.355509, 34.335434)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Building 2" unique_id=558148727]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -8.634638, 7.355509, 26.7725)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Building 2" unique_id=178078172]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 3.9230528, 7.355509, 26.7725)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Building 2" unique_id=63620188]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 18.853643, 7.355509, 29.300636)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Building 2" unique_id=254583655]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 8.837635, 7.355509, 16.35672)
+light_energy = 0.5
+omni_range = 7.0
+omni_attenuation = 0.5
 
 [node name="doorWide2" parent="Building 2" unique_id=1240255308 instance=ExtResource("9_2aqiq")]
 transform = Transform3D(-4, 0, -6.039832e-07, 0, 5.5, 0, 6.039832e-07, 0, -4, 0.995, 0.93161446, 5.266)
