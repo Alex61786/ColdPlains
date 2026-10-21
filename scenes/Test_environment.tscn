@@ -90,9 +90,6 @@ height = 0.2
 radial_segments = 4
 rings = 1
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_7y88a"]
-size = Vector2(3.7, 1.3)
-
 [node name="Node3D" type="Node3D" unique_id=471553504]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1911188129]
@@ -109,9 +106,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.037406206, 0)
 mesh = SubResource("SphereMesh_xoo1l")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=188042677]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0154743, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.918848, -3.74437)
 light_color = Color(0.7294118, 0.68235296, 1, 1)
-light_energy = 1.5
+light_energy = 0.5
 shadow_enabled = true
 omni_range = 55.0
 omni_attenuation = 0.0
@@ -148,7 +145,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh_library = ExtResource("6_kb5rq")
 cell_scale = 4.0
 data = {
-"cells": PackedInt32Array(65533, 65534, 1, 65535, 65534, 1, 1, 65534, 1, 3, 65534, 1, 65531, 65534, 1, 5, 65534, 655362, 65529, 65534, 1048578, 65529, 65532, 1441793, 65529, 65530, 1441793, 65529, 65528, 2, 5, 65532, 1441793, 5, 65530, 1441793, 5, 65528, 1441794, 65531, 65528, 655361, 65533, 65528, 655361, 65535, 65528, 655361, 1, 65528, 655361, 3, 65528, 655361, 0, 65526, 655365, 65534, 65526, 1441797, 3, 65532, 1441793, 3, 65530, 1441793, 1, 65532, 1441793, 1, 65530, 1441793, 65535, 65532, 1441793, 65535, 65530, 1441793, 65533, 65532, 1441793, 65533, 65530, 1441793, 65531, 65530, 1441793, 65531, 65532, 1441793, 65531, 65514, 655361, 65533, 65514, 655361, 65535, 65514, 655361, 1, 65514, 655361, 3, 65514, 655361, 5, 65514, 655362, 65529, 65514, 1048578, 5, 65512, 1048577, 5, 65510, 1048577, 5, 65508, 2, 7, 65508, 1, 9, 65508, 655362, 9, 65506, 1048577, 9, 65504, 1048577, 9, 65502, 1441794, 7, 65502, 655361, 5, 65502, 655361, 3, 65502, 655361, 1, 65502, 1048578, 1, 65500, 1048577, 1, 65498, 1441794, 65535, 65498, 655361, 65533, 65498, 655361, 65529, 65512, 1048577, 65529, 65510, 1048577, 65529, 65508, 1048577, 65529, 65506, 1441794, 65527, 65506, 655361, 65525, 65506, 1048578, 65525, 65504, 1048577, 65525, 65502, 1048577, 65525, 65500, 1048577, 65525, 65498, 2, 65531, 65498, 1, 65529, 65498, 1, 65527, 65498, 1, 3, 65512, 7, 1, 65512, 7, 65535, 65512, 7, 65533, 65512, 7, 65531, 65512, 7, 3, 65510, 7, 1, 65510, 7, 65535, 65510, 7, 65533, 65510, 7, 65531, 65510, 7, 65531, 65508, 7, 65533, 65508, 7, 65535, 65508, 7, 1, 65508, 7, 3, 65508, 7, 65531, 65506, 7, 65533, 65506, 7, 65535, 65506, 7, 1, 65506, 7, 3, 65506, 7, 5, 65506, 7, 7, 65506, 7, 7, 65504, 7, 5, 65504, 7, 3, 65504, 7, 1, 65504, 7, 65535, 65500, 7, 65535, 65502, 7, 65535, 65504, 655367, 65533, 65500, 655367, 65533, 65502, 655367, 65533, 65504, 655367, 65531, 65500, 655367, 65531, 65502, 655367, 65531, 65504, 655367, 65529, 65500, 655367, 65529, 65502, 655367, 65529, 65504, 655367, 65527, 65500, 655367, 65527, 65502, 655367, 65527, 65504, 655367, 65535, 65516, 6, 6, 65499, 655366, 65523, 65502, 1441798)
+"cells": PackedInt32Array(65533, 65534, 1, 65535, 65534, 1, 1, 65534, 1, 3, 65534, 1, 65531, 65534, 1, 5, 65534, 655362, 65529, 65534, 1048578, 65529, 65532, 1441793, 65529, 65530, 1441793, 65529, 65528, 2, 5, 65532, 1441793, 5, 65530, 1441793, 5, 65528, 1441794, 65531, 65528, 655361, 65533, 65528, 655361, 65535, 65528, 655361, 1, 65528, 655361, 3, 65528, 655361, 0, 65526, 655365, 65534, 65526, 1441797, 3, 65532, 1441793, 3, 65530, 1441793, 1, 65532, 1441793, 1, 65530, 1441793, 65535, 65532, 1441793, 65535, 65530, 1441793, 65533, 65532, 1441793, 65533, 65530, 1441793, 65531, 65530, 1441793, 65531, 65532, 1441793, 65531, 65514, 655361, 65533, 65514, 655361, 65535, 65514, 655361, 1, 65514, 655361, 3, 65514, 655361, 5, 65514, 655362, 65529, 65514, 1048578, 5, 65512, 1048577, 5, 65510, 1048577, 5, 65508, 2, 7, 65508, 1, 9, 65508, 655362, 9, 65506, 1048577, 9, 65504, 1048577, 9, 65502, 1441794, 7, 65502, 655361, 5, 65502, 655361, 3, 65502, 655361, 1, 65502, 1048578, 1, 65500, 1048577, 1, 65498, 1441794, 65535, 65498, 655361, 65533, 65498, 655361, 65529, 65512, 1048577, 65529, 65510, 1048577, 65529, 65508, 1048577, 65529, 65506, 1441794, 65527, 65506, 655361, 65525, 65506, 1048578, 65525, 65504, 1048577, 65525, 65502, 1048577, 65525, 65500, 1048577, 65525, 65498, 2, 65531, 65498, 1, 65529, 65498, 1, 65527, 65498, 1, 3, 65512, 7, 1, 65512, 7, 65535, 65512, 7, 65533, 65512, 7, 65531, 65512, 7, 3, 65510, 7, 1, 65510, 7, 65535, 65510, 7, 65533, 65510, 7, 65531, 65510, 7, 65531, 65508, 7, 65533, 65508, 7, 65535, 65508, 7, 1, 65508, 7, 3, 65508, 7, 65531, 65506, 7, 65533, 65506, 7, 65535, 65506, 7, 1, 65506, 7, 3, 65506, 7, 5, 65506, 7, 7, 65506, 7, 7, 65504, 7, 5, 65504, 7, 3, 65504, 7, 1, 65504, 7, 65535, 65500, 7, 65535, 65502, 7, 65535, 65504, 655367, 65533, 65500, 655367, 65533, 65502, 655367, 65533, 65504, 655367, 65531, 65500, 655367, 65531, 65502, 655367, 65531, 65504, 655367, 65529, 65500, 655367, 65529, 65502, 655367, 65529, 65504, 655367, 65527, 65500, 655367, 65527, 65502, 655367, 65527, 65504, 655367, 65535, 65516, 6, 65523, 65502, 1441798, 6, 65500, 655366)
 }
 
 [node name="Bed" parent="Building" unique_id=1629870363 instance=ExtResource("7_182q1")]
@@ -335,10 +332,10 @@ transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 2
 transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, -5.4504485, 0, 37.854977)
 
 [node name="Wall28" parent="Building 2" unique_id=270204273 instance=ExtResource("10_ewrro")]
-transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 23.58, 0, 33.85484)
+transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 23.58, 0, 35.62063)
 
 [node name="Wall29" parent="Building 2" unique_id=1264258425 instance=ExtResource("10_ewrro")]
-transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 23.58, 0, 29.953388)
+transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 23.58, 0, 27.81897)
 
 [node name="Wall30" parent="Building 2" unique_id=1441754675 instance=ExtResource("10_ewrro")]
 transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, 23.58, 0, 25.981642)
@@ -366,13 +363,14 @@ transform = Transform3D(-1.7484555e-07, 0, 4, 0, 10, 0, -4, 0, -1.7484555e-07, -
 transform = Transform3D(-1.7484555e-07, 0, -4, 0, 10, 0, 4, 0, -1.7484555e-07, -20.628702, 0, 18.241995)
 
 [node name="Wall45" parent="Building 2" unique_id=1496683630 instance=ExtResource("10_ewrro")]
-transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -10.045155, 0, 34.389885)
+transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -9.109962, 0, 34.389885)
 
 [node name="Wall46" parent="Building 2" unique_id=1401761557 instance=ExtResource("10_ewrro")]
 transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -13.8675995, 0, 34.389885)
+visible = false
 
 [node name="Wall50" parent="Building 2" unique_id=84388820 instance=ExtResource("10_ewrro")]
-transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -17.144608, 0, 34.389885)
+transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -17.060177, 0, 34.389885)
 
 [node name="Wall51" parent="Building 2" unique_id=62889785 instance=ExtResource("10_ewrro")]
 transform = Transform3D(-4, 0, -3.496911e-07, 0, 10, 0, 3.496911e-07, 0, -4, -17.144608, 0, 17.250202)
@@ -426,48 +424,43 @@ transform = Transform3D(3.9999998, 0, 0, 0, 10, 0, 0, 0, 3.9999998, 16.568, 0, 2
 transform = Transform3D(-1.7484554e-07, 0, 3.9999998, 0, 10, 0, -3.9999998, 0, -1.7484554e-07, -14.5297985, 0, 16.259743)
 
 [node name="stairRamp" parent="Building 2" unique_id=301540981 instance=ExtResource("18_1pmuy")]
-transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 7.00206, 14.892091)
+transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 6.7098446, 14.732144)
 
 [node name="stairRamp2" parent="Building 2" unique_id=1117069453 instance=ExtResource("18_1pmuy")]
-transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 4.7534027, 11.896181)
+transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 4.4611874, 11.736235)
 
 [node name="stairRamp3" parent="Building 2" unique_id=474443146 instance=ExtResource("18_1pmuy")]
-transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 2.5047224, 8.897138)
+transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, 2.212507, 8.737191)
 
-[node name="stairRamp4" parent="Building 2" unique_id=201166459 instance=ExtResource("18_1pmuy")]
-transform = Transform3D(-3, 2.0057455e-06, -2.8645016e-07, 0, 32.766075, 2.2943056, 2.6226832e-07, 22.943054, -3.276608, -16.415, 0.8324131, 8.022188)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Building 2" unique_id=1718012697]
-transform = Transform3D(-1.7903136e-07, 2.5071824e-07, -4, 2.8678823, 8.191521, 0, 4.0957603, -5.7357645, -1.7484555e-07, -16.735714, 4.705387, 9.0756035)
-mesh = SubResource("PlaneMesh_7y88a")
-skeleton = NodePath("../stairRamp4")
+[node name="stairRamp5" parent="Building 2" unique_id=936839533 instance=ExtResource("18_1pmuy")]
+transform = Transform3D(-5, 0, -6.039832e-07, 0, 10, 0, 7.54979e-07, 0, -4, -16.414612, -0.048587084, 5.6927233)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Building 2" unique_id=746935297]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.425331, 7.4288874, 14.34147)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.425331, 6.6904173, 14.34147)
 light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Building 2" unique_id=2033927214]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 7.2881966, 7.355509, 34.335434)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 7.2881966, 6.6170387, 34.335434)
 light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Building 2" unique_id=558148727]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -8.634638, 7.355509, 26.7725)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -8.634638, 6.6170387, 26.7725)
 light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Building 2" unique_id=178078172]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 3.9230528, 7.355509, 26.7725)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 3.9230528, 6.6170387, 26.7725)
 light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Building 2" unique_id=63620188]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 18.853643, 7.355509, 29.300636)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 18.853643, 6.6170387, 29.300636)
 light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
@@ -478,26 +471,60 @@ light_energy = 0.5
 omni_range = 7.0
 omni_attenuation = 0.5
 
-[node name="doorWide2" parent="Building 2" unique_id=1240255308 instance=ExtResource("9_2aqiq")]
-transform = Transform3D(-4, 0, -6.039832e-07, 0, 5.5, 0, 6.039832e-07, 0, -4, 0.995, 0.93161446, 5.266)
+[node name="doorWide3" parent="Building 2" unique_id=1961002273 instance=ExtResource("9_2aqiq")]
+transform = Transform3D(-1.7484555e-07, 0, -4, 0, 5.5, 0, 4, 0, -1.7484555e-07, 23.570013, 0.9231057, 31.739094)
 
-[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="Building 2" unique_id=385899112]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.0020534992, 0.007191658, -12.302265)
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="Building 2" unique_id=1290457295]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.001749, -0.0013170242, 32.732037)
 operation = 2
 use_collision = true
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Building 2/CSGCombiner3D2" unique_id=749614023]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Building 2/CSGCombiner3D3" unique_id=1154488907]
 transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 4, -1, 0, -17.569)
 mesh = ExtResource("11_fqydn")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Building 2/CSGCombiner3D2" unique_id=401791945]
+[node name="CSGBox3D" type="CSGBox3D" parent="Building 2/CSGCombiner3D3" unique_id=681977164]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -0.94803417, 2.7122629, -17.90689)
 operation = 2
 size = Vector3(1.1262207, 1.0412598, 1)
 
-[node name="Second floor" type="Node3D" parent="Building 2" unique_id=1885070281]
+[node name="doorWide4" parent="Building 2" unique_id=1240255308 instance=ExtResource("9_2aqiq")]
+transform = Transform3D(-4, 0, -6.039832e-07, 0, 5.5, 0, 6.039832e-07, 0, -4, 0.99499846, 0.8930001, 5.2560015)
 
-[node name="GridMap2" type="GridMap" parent="Building 2/Second floor" unique_id=1208922057]
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="Building 2" unique_id=385899112]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.002418518, -0.0013170242, -12.311985)
+operation = 2
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Building 2/CSGCombiner3D4" unique_id=749614023]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 4, -1, 0, -17.569)
+mesh = ExtResource("11_fqydn")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building 2/CSGCombiner3D4" unique_id=401791945]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -0.94803417, 2.7122629, -17.90689)
+operation = 2
+size = Vector3(1.1262207, 1.0412598, 1)
+
+[node name="doorWide2" parent="Building 2" unique_id=642356601 instance=ExtResource("9_2aqiq")]
+transform = Transform3D(-4, 0, -6.039832e-07, 0, 5.5, 0, 6.039832e-07, 0, -4, -13.083002, 0.8930001, 34.387)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="Building 2" unique_id=957146972]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -14.075582, -0.0013170242, 16.819016)
+operation = 2
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Building 2/CSGCombiner3D2" unique_id=1945804994]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 4, -1, 0, -17.569)
+mesh = ExtResource("11_fqydn")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building 2/CSGCombiner3D2" unique_id=1183774398]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -0.94803417, 2.7122629, -17.90689)
+operation = 2
+size = Vector3(1.1262207, 1.0412598, 1)
+
+[node name="Second floor" type="Node3D" parent="." unique_id=1885070281]
+
+[node name="GridMap2" type="GridMap" parent="Second floor" unique_id=1208922057]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.2, -35.174)
 mesh_library = ExtResource("6_kb5rq")
 cell_scale = 4.0
