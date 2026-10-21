@@ -57,3 +57,16 @@ func use_health_pack(player: Node) -> bool:
 			return false
 	print("No Health Pack in inventory!")
 	return false
+#possibly can be commanded out
+
+func use_health_pack_server(heal_amount: int) -> bool:
+	if not multiplayer.is_server():
+		return false
+	var player := get_parent()
+	# Find a Health Pack in the inventory.
+	for i in range(inventory.size()):
+		if inventory[i].get("id", "") == "health_pack":
+			inventory.remove_at(i)
+			print("Health Pack consumed on server.")
+			return true
+	return false

@@ -46,9 +46,9 @@ func _physics_process(_delta: float) -> void:
 		attempt_pickup()
 	
 	if Input.is_action_just_pressed("use_health_pack"):
-		var player = get_parent()
-		if inventory:
-			inventory.use_health_pack(player)
+		var player := get_parent()
+		if player.has_method("request_use_health_pack"):
+			player.request_use_health_pack()
 
 func attempt_pickup() -> void:
 	# Find closest item within range
