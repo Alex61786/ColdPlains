@@ -33,7 +33,10 @@ var slide_timer: float = 0.0
 var is_dead: bool = false
 
 var health = 100
+var max_health = 100
 var damage = 10
+
+const HEALTH_PACK_HEAL_AMOUNT: int = 30 #Do we want to heal that much?
 
 var SPEED = 10.0
 var JUMP_VELOCITY = 10.0
@@ -295,3 +298,16 @@ func die():
 func flashLight_toggle():
 	flashlight.visible = not flashlight.visible
 	
+
+func heal(amount: int) -> bool:
+	if not is_multiplayer_authority():
+		return false
+	if is_dead or health >= max_health:
+		return false
+	var old_health = health
+	health = mini(health + amount, max_health)
+	if health != old_health:
+		health_changed.emit(health)
+		print("Player healed! Health: ", health, "/", max_health)
+		return true
+	return false

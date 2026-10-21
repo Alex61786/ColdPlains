@@ -40,8 +40,9 @@ func _spawn_items() -> void:
 		
 		var new_item = item_scene.instantiate()
 		new_item.global_position = spawn_pos
-		new_item.item_id = "item_" + str(i)
-		new_item.item_name = "Item " + str(i)
+		new_item.item_id = "health_pack"
+		new_item.item_name = "Health Pack"
+		new_item.item_type = "consumable"
 		
 		add_child(new_item)
 		spawned_items.append(new_item)
