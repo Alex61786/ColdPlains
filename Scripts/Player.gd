@@ -32,7 +32,7 @@ var is_sliding: bool = false
 var slide_timer: float = 0.0
 var is_dead: bool = false
 
-var health: int = 50
+var health: int = 100
 var max_health: int = 100
 var damage: int = 10
 
