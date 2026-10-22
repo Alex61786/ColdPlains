@@ -13,7 +13,176 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1166060240]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.5
+offset_top = -56.0
+offset_right = 221.5
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Panel" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=1554560968]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel" unique_id=621218972]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel/MarginContainer" unique_id=1272969950]
+layout_mode = 2
+
+[node name="Name Label" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=1331263991]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Player Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" unique_id=462365295]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=706576704]
+layout_mode = 2
+text = "SURVIVED"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1731391542]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time Label" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=8650789]
+layout_mode = 2
+text = "2"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1660767407]
+layout_mode = 2
+text = " Seconds"
+
+[node name="Panel2" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=1307087158]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel2" unique_id=1125270858]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel2/MarginContainer" unique_id=550748450]
+layout_mode = 2
+
+[node name="Name Label" type="Label" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer" unique_id=233644533]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Player Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer" unique_id=1217401680]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=817583407]
+layout_mode = 2
+text = "SURVIVED"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=246659179]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time Label" type="Label" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=806024302]
+layout_mode = 2
+text = "2"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel2/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2065497873]
+layout_mode = 2
+text = " Seconds"
+
+[node name="Panel3" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=1800020766]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel3" unique_id=265644789]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel3/MarginContainer" unique_id=1989588105]
+layout_mode = 2
+
+[node name="Name Label" type="Label" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer" unique_id=355036156]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Player Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer" unique_id=23468350]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=456380197]
+layout_mode = 2
+text = "SURVIVED"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer/VBoxContainer" unique_id=12051708]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time Label" type="Label" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2074306974]
+layout_mode = 2
+text = "2"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=148000960]
+layout_mode = 2
+text = " Seconds"
+
+[node name="Panel4" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=240765459]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel4" unique_id=1657719353]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel4/MarginContainer" unique_id=313961306]
+layout_mode = 2
+
+[node name="Name Label" type="Label" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer" unique_id=813927203]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Player Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer" unique_id=994781103]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=152187017]
+layout_mode = 2
+text = "SURVIVED"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1391875889]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time Label" type="Label" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=204038023]
+layout_mode = 2
+text = "2"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel4/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=876698327]
+layout_mode = 2
+text = " Seconds"
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=1943229864]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Play Again"
+
 [node name="Label" type="Label" parent="." unique_id=2083124649]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

@@ -116,7 +116,7 @@ func _on_single_player_button_pressed():
 	
 
 
-func add_player(peer_id):
+func add_player(peer_id, player_id = -1):
 	player = Player.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
