@@ -16,7 +16,11 @@ var players = {}
 # before the connection is made. It will be passed to every other peer.
 # For example, the value of "name" can be set to something the player
 # entered in a UI scene.
-var player_info = {"name": "Player"}
+var player_info = {
+	"name": "Player",
+	"life_length": -1,
+	"id": -1
+}
 
 var players_loaded = 0
 
@@ -47,6 +51,7 @@ func create_game():
 	
 	if player_info["name"] == "Player":
 		player_info["name"] += "1"
+	player_info["id"] = 1
 	
 	players[1] = player_info
 	player_connected.emit(1, player_info)
@@ -64,7 +69,7 @@ func load_game(game_node_path):
 	if multiplayer.is_server():
 		#get_node(game_node_path).add_player(1)
 		for id in players:
-			get_node(game_node_path).add_player(id)
+			get_node(game_node_path).add_player(id, players[id]["id"])
 
 
 # Every peer will call this when they have loaded the game scene.
@@ -87,9 +92,11 @@ func _on_player_connected(id):
 func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
-	if players[new_player_id]["name"] == "Player" and multiplayer.get_unique_id() == 1:
-		change_name.rpc_id(new_player_id, players[new_player_id]["name"] + str(multiplayer.get_peers().size() + 1))
-		print(multiplayer.get_peers())
+	if multiplayer.get_unique_id() == 1:
+		update_player_info.rpc(new_player_id, "id", multiplayer.get_peers().size() + 1)
+		if players[new_player_id]["name"] == "Player":
+			change_name.rpc_id(new_player_id, players[new_player_id]["name"] + str(multiplayer.get_peers().size() + 1))
+			print(multiplayer.get_peers())
 	player_connected.emit(new_player_id, new_player_info)
 
 
@@ -109,14 +116,29 @@ func _on_connected_ok():
 
 @rpc("any_peer", "reliable")
 func change_name(new_name):
-	player_info["name"] = new_name
-	players[multiplayer.get_unique_id()] = player_info
-	update_player_name.rpc(multiplayer.get_unique_id(), new_name)
+	if !new_name == "":
+		player_info["name"] = new_name
+		players[multiplayer.get_unique_id()] = player_info
+		update_player_name.rpc(multiplayer.get_unique_id(), new_name)
 
 
 @rpc("any_peer", "reliable")
 func update_player_name(player_id, new_name):
 	players[player_id]["name"] = new_name
+
+
+func dead(lifetime):
+	update_player_info.rpc(multiplayer.get_unique_id(), "life_length", lifetime)
+
+
+@rpc("any_peer", "reliable", "call_local")
+func update_player_info(player_id, key, info):
+	players[player_id][key] = info
+
+
+#@rpc("any_peer", "reliable", "call_local")
+#func assign_id(player_id, key, info):
+	#players[player_id][key] = info
 
 
 func _on_connected_fail():
@@ -131,3 +153,4 @@ func _on_server_disconnected():
 
 func _process(delta: float) -> void:
 	player_connected.emit(1, player_info)
+	#print(players)

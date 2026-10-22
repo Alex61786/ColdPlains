@@ -37,6 +37,9 @@ var max_health: int = 100
 var damage: int = 10
 
 const HEALTH_PACK_HEAL_AMOUNT: int = 30 #Do we want to heal that much?
+var alive_time = 0
+var spawn_pos = Vector3(0,1,0)
+
 
 var SPEED = 10.0
 var JUMP_VELOCITY = 10.0
@@ -63,6 +66,7 @@ func _ready():
 	if not is_multiplayer_authority(): 
 		return
 	
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 	
@@ -72,14 +76,31 @@ func _ready():
 		Lobby.player_loaded.rpc_id(1)
 
 
+func _on_tree_entered() -> void:
+	match Lobby.players[(name.to_int())]["id"]:
+		1: spawn_pos = Vector3(40,1,19)
+		2: spawn_pos = Vector3(-32,1,26)
+		3: spawn_pos = Vector3(-31,1,-14)
+		4: spawn_pos = Vector3(40,1,-48)
+	position = spawn_pos
+
+
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _unhandled_input(event):
-	if not is_multiplayer_authority() or is_dead:
+	if not is_multiplayer_authority():
 		return
-
+	
+	if Input.is_action_just_pressed("capture_toggle") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif Input.is_action_just_pressed("capture_toggle"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if is_dead:
+		return
+	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
@@ -109,19 +130,18 @@ func _unhandled_input(event):
 		play_shoot_effects.rpc()
 		perform_shooting_logic()
 
-	if Input.is_action_just_pressed("capture_toggle") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif Input.is_action_just_pressed("capture_toggle"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 	elif Input.is_action_just_released("shoot"):
 		is_shooting = false
 
 
 func _physics_process(delta):
-	if not is_multiplayer_authority() or is_dead: 
+	if not is_multiplayer_authority(): 
 		return
-
+	
+	if is_dead:
+		return
+	
+	alive_time += delta
 	handle_crouch(delta)
 
 	if not is_on_floor():
@@ -287,10 +307,9 @@ func die():
 	#if is_dead:
 		#return
 	velocity = Vector3.ZERO
-	set_process(false)
-	set_physics_process(false)
 	hide()
 	if is_multiplayer_authority():
+		Lobby.dead(alive_time)
 		get_tree().call_group("ui","show_lose_screen")
 
 
