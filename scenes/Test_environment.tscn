@@ -71,14 +71,14 @@ rings = 64
 is_hemisphere = true
 
 [sub_resource type="Curve" id="Curve_xoo1l"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15730345, 0.3312102), 0.0, 0.0, 0, 0, Vector2(0.15730345, 0.3312102), 0.0, 0.0, 0, 0, Vector2(0.15730345, 0.3312102), 0.0, 0.0, 0, 0, Vector2(0.3312102, 0.15730345), 0.0, 0.0, 0, 0, Vector2(0.46067423, 0.522293), 0.0, 0.0, 0, 0, Vector2(1, 0.84076434), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15730345, 0.3312102), 0.0, 0.0, 0, 0, Vector2(0.15730345, 0.3312102), 0.0, 0.0, 0, 0, Vector2(0.3312102, 0.15730345), 0.0, 0.0, 0, 0, Vector2(0.3312102, 0.15730345), 0.0, 0.0, 0, 0, Vector2(0.522293, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.84076434, 1), 0.0, 0.0, 0, 0]
 point_count = 7
 point_1/position = Vector2(0.15730345, 0.3312102)
 point_2/position = Vector2(0.15730345, 0.3312102)
-point_3/position = Vector2(0.15730345, 0.3312102)
+point_3/position = Vector2(0.3312102, 0.15730345)
 point_4/position = Vector2(0.3312102, 0.15730345)
-point_5/position = Vector2(0.46067423, 0.522293)
-point_6/position = Vector2(1, 0.84076434)
+point_5/position = Vector2(0.522293, 0.46067423)
+point_6/position = Vector2(0.84076434, 1)
 
 [sub_resource type="CurveTexture" id="CurveTexture_t4cci"]
 curve = SubResource("Curve_xoo1l")
