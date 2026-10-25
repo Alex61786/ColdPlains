@@ -306,13 +306,21 @@ func die():
 	velocity = Vector3.ZERO
 	hide()
 	if is_multiplayer_authority():
-		Lobby.dead(alive_time)
+		Lobby.lifetime_update(alive_time)
 		get_tree().call_group("ui","show_lose_screen")
+
+
+func delete():
+	Lobby.gameover = false
+	print("deleting player")
+	Lobby.update_player_info(name.to_int(), "life_length", -1)
+	queue_free()
 
 
 @rpc("call_local", "reliable", "any_peer")
 func flashLight_toggle():
 	flashlight.visible = not flashlight.visible
+
 
 
 func heal(amount: int) -> bool:
