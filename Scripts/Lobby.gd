@@ -23,6 +23,9 @@ var player_info = {
 }
 
 var players_loaded = 0
+var timer = 0.5
+var gameover = false
+
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -93,7 +96,8 @@ func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
 	if multiplayer.get_unique_id() == 1:
-		update_player_info.rpc(new_player_id, "id", multiplayer.get_peers().size() + 1)
+		#update_player_info.rpc(new_player_id, "id", multiplayer.get_peers().size() + 1)
+		players[new_player_id]["id"] = multiplayer.get_peers().size() + 1
 		if players[new_player_id]["name"] == "Player":
 			change_name.rpc_id(new_player_id, players[new_player_id]["name"] + str(multiplayer.get_peers().size() + 1))
 			print(multiplayer.get_peers())
@@ -127,13 +131,34 @@ func update_player_name(player_id, new_name):
 	players[player_id]["name"] = new_name
 
 
-func dead(lifetime):
+func lifetime_update(lifetime):
 	update_player_info.rpc(multiplayer.get_unique_id(), "life_length", lifetime)
 
 
 @rpc("any_peer", "reliable", "call_local")
 func update_player_info(player_id, key, info):
+	#players.get_or_add(player_id)
 	players[player_id][key] = info
+
+
+func send_update():
+	var counter = 0
+	for i in players:
+		if players[i] is Dictionary:
+			if players[i]["life_length"] < 0:
+				counter += 1
+	if counter == 1 and players.size() > 1:
+		gameover = true
+	else:
+		gameover = false
+	
+	recieve_update.rpc(players)
+
+
+@rpc("any_peer", "reliable", "call_local")
+func recieve_update(data):
+	players = data
+
 
 
 #@rpc("any_peer", "reliable", "call_local")
@@ -154,3 +179,8 @@ func _on_server_disconnected():
 func _process(delta: float) -> void:
 	player_connected.emit(1, player_info)
 	#print(players)
+	timer -= delta
+	if timer < 0:
+		timer = 0.5
+		if multiplayer.get_unique_id() == 1:
+			send_update()
