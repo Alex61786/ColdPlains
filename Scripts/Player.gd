@@ -32,8 +32,14 @@ var is_sliding: bool = false
 var slide_timer: float = 0.0
 var is_dead: bool = false
 
-var health = 100
-var damage = 10
+var health: int = 100
+var max_health: int = 100
+var damage: int = 10
+
+const HEALTH_PACK_HEAL_AMOUNT: int = 30 #Do we want to heal that much?
+var alive_time = 0
+var spawn_pos = Vector3(0,1,0)
+
 
 var SPEED = 10.0
 var JUMP_VELOCITY = 10.0
@@ -60,6 +66,7 @@ func _ready():
 	if not is_multiplayer_authority(): 
 		return
 	
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 	
@@ -69,14 +76,31 @@ func _ready():
 		Lobby.player_loaded.rpc_id(1)
 
 
+func _on_tree_entered() -> void:
+	match Lobby.players[(name.to_int())]["id"]:
+		1: spawn_pos = Vector3(40,1,19)
+		2: spawn_pos = Vector3(-32,1,26)
+		3: spawn_pos = Vector3(-31,1,-14)
+		4: spawn_pos = Vector3(40,1,-48)
+	position = spawn_pos
+
+
 func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _unhandled_input(event):
-	if not is_multiplayer_authority() or is_dead:
+	if not is_multiplayer_authority():
 		return
-
+	
+	if Input.is_action_just_pressed("capture_toggle") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif Input.is_action_just_pressed("capture_toggle"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if is_dead:
+		return
+	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
@@ -106,19 +130,18 @@ func _unhandled_input(event):
 		play_shoot_effects.rpc()
 		perform_shooting_logic()
 
-	if Input.is_action_just_pressed("capture_toggle") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif Input.is_action_just_pressed("capture_toggle"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 	elif Input.is_action_just_released("shoot"):
 		is_shooting = false
 
 
 func _physics_process(delta):
-	if not is_multiplayer_authority() or is_dead: 
+	if not is_multiplayer_authority(): 
 		return
-
+	
+	if is_dead:
+		return
+	
+	alive_time += delta
 	handle_crouch(delta)
 
 	if not is_on_floor():
@@ -187,7 +210,8 @@ func _physics_process(delta):
 func perform_shooting_logic():
 	if raycast.is_colliding():
 		var hit_player = raycast.get_collider()
-		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+		#hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+		hit_player.request_damage.rpc_id(1)
 	
 	if enemy_raycast.is_colliding():
 		enemy_raycast.get_collider().damage_taken += damage
@@ -249,18 +273,16 @@ func play_shoot_effects():
 			print("Uzi muzzle flash is null")
 
 
-@rpc("any_peer", "call_local")
-func receive_damage():
-	print("receive_damage() called on player:", name)
-	if is_dead:
-		print("Player is already dead, ignoring damage")
+@rpc("any_peer", "call_remote", "reliable")
+func request_damage() -> void:
+	if not multiplayer.is_server():
 		return
-	health -= damage
-	print("Health reduced to:", health)
-	health_changed.emit(health)
-	print("health_changed signal emitted with value:", health)
-	if health <= 0:
-		print("Player dead, calling die()")
+	if is_dead:
+		return
+	# Apply damage on the server.
+	var new_health := maxi(health - damage, 0)
+	_broadcast_health(new_health)
+	if new_health <= 0:
 		is_dead = true
 		rpc("die")
 
@@ -281,16 +303,93 @@ func handle_crouch(delta) -> void:
 
 @rpc("authority", "call_local")
 func die():
-	#if is_dead:
-		#return
 	velocity = Vector3.ZERO
-	set_process(false)
-	set_physics_process(false)
 	hide()
 	if is_multiplayer_authority():
+		Lobby.lifetime_update(alive_time)
 		get_tree().call_group("ui","show_lose_screen")
+
+
+func delete():
+	Lobby.gameover = false
+	print("deleting player")
+	Lobby.update_player_info(name.to_int(), "life_length", -1)
+	queue_free()
 
 
 @rpc("call_local", "reliable", "any_peer")
 func flashLight_toggle():
 	flashlight.visible = not flashlight.visible
+
+
+
+func heal(amount: int) -> bool:
+	if not is_multiplayer_authority():
+		return false
+	if is_dead or health >= max_health:
+		return false
+	var old_health = health
+	health = mini(health + amount, max_health)
+	if health != old_health:
+		health_changed.emit(health)
+		print("Player healed! Health: ", health, "/", max_health)
+		return true
+	return false
+
+
+func request_use_health_pack() -> void:
+	if not is_multiplayer_authority() or is_dead:
+		return
+	if multiplayer.is_server():
+		_server_use_health_pack()
+	else:
+		request_use_health_pack_rpc.rpc_id(1)
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_use_health_pack_rpc() -> void:
+	if not multiplayer.is_server():
+		return
+	# Only accept requests from the owner of this player.
+	var sender_id := multiplayer.get_remote_sender_id()
+	if sender_id != get_multiplayer_authority():
+		return
+	_server_use_health_pack()
+
+
+func _server_use_health_pack() -> void:
+	if not multiplayer.is_server() or is_dead:
+		return
+	var inventory_node := get_node_or_null("PlayerInventory") as PlayerInventory
+	if inventory_node == null:
+		print("[HealthPack] Inventory not found!")
+		return
+	print("[HealthPack] Server health: ", health, "/", max_health)
+	if health >= max_health:
+		print("[HealthPack] Health is already full.")
+		return
+	# Only consume the item if one exists.
+	if not inventory_node.use_health_pack_server(HEALTH_PACK_HEAL_AMOUNT):
+		print("[HealthPack] No Health Pack in inventory!")
+		return
+	# Calculate the new health on the server.
+	var new_health := mini(health + HEALTH_PACK_HEAL_AMOUNT,max_health)
+	_broadcast_health(new_health)
+	print("[HealthPack] Used successfully! New health: ",new_health,"/",max_health)
+
+
+func _broadcast_health(new_health: int) -> void:
+	if not multiplayer.is_server():
+		return
+	_receive_health_update.rpc(new_health)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _receive_health_update(new_health: int) -> void:
+	# Only accept health updates from the server.
+	if not multiplayer.is_server():
+		if multiplayer.get_remote_sender_id() != 1:
+			return
+	health = clampi(new_health, 0, max_health)
+	health_changed.emit(health)
+	print("[Health] Updated: ", health, "/", max_health)
